@@ -48,6 +48,7 @@ class Context(object):
         self.config = config
         self.title = 'Untitled'
         self.summary = None
+        self.metadesc = None
         self.pub_date = None
         self.source_filename = source_filename
         self.links = []
@@ -135,13 +136,15 @@ class Context(object):
             'initial_header_level': self.config.get('rst_header_level', 2),
             'rstblog_context':      self
         }
+        metadesc = self.metadesc
         parts = publish_parts(source=contents,
                               writer_name='html4css1',
                               settings_overrides=settings)
         return {
             'title':        Markup(parts['title']).striptags(),
             'html_title':   Markup(parts['html_title']),
-            'fragment':     Markup(parts['fragment'])
+            'fragment':     Markup(parts['fragment']),
+            'metadesc':     u'' if metadesc is None else metadesc
         }
 
     def render_contents(self):

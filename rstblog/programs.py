@@ -116,6 +116,10 @@ class RSTProgram(TemplatedProgram):
             if summary_override is not None:
                 self.context.summary = summary_override
 
+            metadesc_override = cfg.get('metadesc')
+            if metadesc_override is not None:
+                self.context.metadesc = metadesc_override
+
         if title is not None:
             self.context.title = title
 
